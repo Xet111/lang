@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:utext="#{main.page}"></title>
+</head>
+<body>
+<div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
+    <a th:href="@{/index?lang=en}" th:text="#{locale.en}"></a>
+    &nbsp;|&nbsp;
+    <a th:href="@{/index?lang=ru}" th:text="#{locale.ru}"></a>
+    &nbsp;|&nbsp;
+</div>
+<table border="1" >
+    <tr>
+        <th>ID</th>
+        <th th:text="#{user.name}"></th>
+    </tr>
+
+    <span th:if="__${#locale}__=='en'">
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">..</td>
+        <td th:text="${user.firstName}">..</td>
+    </tr>
+        </span>
+    <span th:unless="__${#locale}__=='en'">
+        <tr th:each="user : ${users}">
+        <td th:text="${user.id}">..</td>
+        <td th:text="${user.lastName}">..</td>
+    </tr>
+    </span>
+</table>
+
+
+</body>
+</html>

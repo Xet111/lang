@@ -19,7 +19,18 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id",nullable = false)
+    private long id;
+    @Column(name = "first_name",nullable = false)
+    private String firstName;
+    @Column(name = "last_name",nullable = false)
+    private String lastName;
+
     @Column(name = "authorities", nullable = false)
+    @ElementCollection
     private List<Role> authorities;
     @Column(name = "password", nullable = false)
     private String password;
@@ -33,14 +44,4 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired;
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id",nullable = false)
-    private long id;
-    @Column(name = "first_name",nullable = false)
-    private String firstName;
-    @Column(name = "last_name",nullable = false)
-    private String lastName;
 }

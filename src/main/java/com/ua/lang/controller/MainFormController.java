@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/")
 public class MainFormController{
 
-    private final UserService userService;
+    private UserService userService;
 
     @Autowired
     public MainFormController(UserService userService) {

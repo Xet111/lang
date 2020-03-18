@@ -1,13 +1,8 @@
 package com.ua.lang.entity;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.lang.annotation.Documented;
-import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Builder
-@Data
 @Entity
 @Table(name = "user")
-public class User implements UserDetails {
+public class User  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -29,9 +23,11 @@ public class User implements UserDetails {
     @Column(name = "last_name",nullable = false)
     private String lastName;
 
-    @Column(name = "authorities", nullable = false)
-    @ElementCollection
-    private List<Role> authorities;
+    @Column(name = "role", nullable = false)
+    /*@ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))*/
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "username", nullable = false)
@@ -44,4 +40,44 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired;
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public RoleType getRole() {
+        return role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
 }

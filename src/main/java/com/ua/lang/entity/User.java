@@ -24,10 +24,9 @@ public class User  {
     private String lastName;
 
     @Column(name = "role", nullable = false)
-    /*@ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))*/
     @Enumerated(EnumType.STRING)
     private RoleType role;
+
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "username", nullable = false)
@@ -41,43 +40,4 @@ public class User  {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    public long getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public RoleType getRole() {
-        return role;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
 }

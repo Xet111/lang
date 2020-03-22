@@ -33,15 +33,19 @@ public class UserService implements UserDetailsService {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         userRepository.findByUsername("user").ifPresent(user -> {
             user.setPassword(new BCryptPasswordEncoder().encode("password"));
             userRepository.save(user);
+
+
         });
 
-
-        }
-
+        userRepository.findByUsername("admin").ifPresent(user -> {
+            user.setPassword(new BCryptPasswordEncoder().encode("password"));
+            userRepository.save(user);
+        });
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
